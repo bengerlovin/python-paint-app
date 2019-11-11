@@ -10,7 +10,7 @@ class PaintApplication:
 
  # ------ Define Class Variables ---
 
-    draw_tool = "rectangle"
+    draw_tool = "text"
 
     left_button = "up"
 
@@ -39,6 +39,8 @@ class PaintApplication:
             self.oval_draw(event)
         elif self.draw_tool == "rectangle":
             self.rectangle_draw(event)
+        elif self.draw_tool == "text":
+            self.text_draw(event)
 
 
 # ------ Mouse Down ---------------
@@ -116,6 +118,17 @@ class PaintApplication:
 
 
 # ------ Draw Text -----------------
+    
+    def text_draw(self, event=None):
+    
+        if None not in(self.x1_line_pt, self.y1_line_pt): 
+            
+            text_font = tkinter.font.Font(family ="Cambria", size = 20, weight = "bold")
+
+            event.widget.create_text(self.x1_line_pt, self.y1_line_pt, fill = "black", font = text_font, text = "Wow")
+
+# ------ Menu Bar -----------------
+
 
 
 # ------ Intialize -----------------
