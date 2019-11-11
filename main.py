@@ -12,7 +12,7 @@ class PaintApplication:
  # ------ Define Class Variables ---
 
 
-    draw_tool = "line"
+    draw_tool = "pencil"
 
     left_button = "up"
 
@@ -61,14 +61,13 @@ class PaintApplication:
     def pencil_draw(self, event=None):
         if self.left_button == "down":
 
-            if self.x_pos is not None and self.y_pos is not None:
+            if self.x_position is not None and self.y_position is not None:
 
-                event.widget.create_line(
-                    self.x_pos, self.y_pos, event.x, event.y, smooth=TRUE)
+                event.widget.create_line(self.x_position, self.y_position, event.x, event.y, smooth=TRUE)
 
-            #update x and y position as function is called
-            self.x_pos = event.x
-            self.y_pos = event.y
+        #update x and y position as function is called
+        self.x_position = event.x
+        self.y_position = event.y
 
 
 # ------ Draw Oval -----------------
@@ -77,9 +76,8 @@ class PaintApplication:
 
     def line_draw(self, event=None):
 
-        if None not in(self.x1_line, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt):
-            event.widget.create_line(self.x1_line, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt
-                    , smooth=TRUE, fill = "green")
+        if None not in(self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt):
+            event.widget.create_line(self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt, smooth=TRUE, fill = "green")
 
 
 
