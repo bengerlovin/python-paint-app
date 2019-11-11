@@ -12,7 +12,7 @@ class PaintApplication:
  # ------ Define Class Variables ---
 
 
-    draw_tool = "pencil"
+    draw_tool = "arc"
 
     left_button = "up"
 
@@ -35,6 +35,11 @@ class PaintApplication:
 
             if self.draw_tool == "line":
                 self.line_draw(event)
+            elif self.draw_tool == "arc": 
+                self.arc_draw(event)
+            elif self.draw_tool == "oval": 
+                self.oval_draw(event)
+
 
 # ------ Mouse Down ---------------
 
@@ -72,6 +77,15 @@ class PaintApplication:
 
 # ------ Draw Oval -----------------
 
+    def oval_draw(self, event=None):
+        
+         if None not in(self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt):
+            
+            #set up coordinates
+            coords = self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt
+            event.widget.create_arc(coords, start =0, extent = 150, fill = "blue", style = ARC)
+
+
 # ------ Draw Line -----------------
 
     def line_draw(self, event=None):
@@ -80,11 +94,17 @@ class PaintApplication:
             event.widget.create_line(self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt, smooth=TRUE, fill = "green")
 
 
-
-    
-
-
 # ------ Draw Arc ------------------
+
+    def arc_draw(self, event=None):
+        
+         if None not in(self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt):
+            
+            #set up coordinates
+            coords = self.x1_line_pt, self.x2_line_pt, self.y1_line_pt, self.y2_line_pt
+            event.widget.create_arc(coords, start =0, extent = 150, fill = "blue", style = ARC)
+
+
 
 # ------ Draw Rectangle ------------
 
