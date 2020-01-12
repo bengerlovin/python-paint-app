@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import tkinter.font
+from PIL import Image, ImageTK
+
 
 
 # ------ Define Class -------------
@@ -41,6 +43,17 @@ class PaintApplication:
             self.rectangle_draw(event)
         elif self.draw_tool == "text":
             self.text_draw(event)
+
+
+
+# ------ Drop Down Menu -----------------
+
+clickedOption = StringVar()
+clickedOption.set("line")
+
+
+drop = OptionMenu(root, clickedOption, "text", "line", "oval", "arc", "rectangle")
+drop.pack()
 
 
 # ------ Mouse Down ---------------
@@ -127,16 +140,19 @@ class PaintApplication:
 
             event.widget.create_text(self.x1_line_pt, self.y1_line_pt, fill = "black", font = text_font, text = "Wow")
 
-# ------ Menu Bar -----------------
-
-
-
 # ------ Intialize -----------------
 
     def __init__(self, root):
         drawing_area = Canvas(root)
 
         drawing_area.pack()
+
+        #Title
+        root.title("It's Time to Paint!")
+
+        menubar = Menu(root)
+        file_menu = Menu(root, tearoff = 0)
+        file_menu.add_command(label="Open")
 
         # Bindings
         drawing_area.bind("<Motion>", self.motion)
