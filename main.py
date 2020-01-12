@@ -1,9 +1,7 @@
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-import tkinter.font
-from PIL import Image, ImageTK
+import tkinter.font 
 
+root = Tk()
 
 
 # ------ Define Class -------------
@@ -20,6 +18,7 @@ class PaintApplication:
 
     x1_line_pt, y1_line_pt, x2_line_pt, y2_line_pt = None, None, None, None
 
+    wordChoice = "Wow"
 
 # ------ Mouse Up -----------------
     def left_but_up(self, event=None):
@@ -43,17 +42,6 @@ class PaintApplication:
             self.rectangle_draw(event)
         elif self.draw_tool == "text":
             self.text_draw(event)
-
-
-
-# ------ Drop Down Menu -----------------
-
-clickedOption = StringVar()
-clickedOption.set("line")
-
-
-drop = OptionMenu(root, clickedOption, "text", "line", "oval", "arc", "rectangle")
-drop.pack()
 
 
 # ------ Mouse Down ---------------
@@ -138,7 +126,17 @@ drop.pack()
             
             text_font = tkinter.font.Font(family ="Cambria", size = 20, weight = "bold")
 
-            event.widget.create_text(self.x1_line_pt, self.y1_line_pt, fill = "black", font = text_font, text = "Wow")
+            event.widget.create_text(self.x1_line_pt, self.y1_line_pt, fill = "black", font = text_font, text = "Hello!")
+
+# ------ Menu Bar -----------------
+
+    click = StringVar()
+    draw_tool = click
+
+    drop = OptionMenu(root, click, "line","text", "arc", "oval", "rectangle")
+    drop.pack()
+   
+
 
 # ------ Intialize -----------------
 
@@ -160,6 +158,5 @@ drop.pack()
         drawing_area.bind("<ButtonRelease-1>", self.left_but_up)
 
 
-root = Tk()
 paint_application = PaintApplication(root)
 root.mainloop()
