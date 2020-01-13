@@ -1,5 +1,5 @@
 from tkinter import *
-import tkinter.font 
+import tkinter.font
 
 root = Tk()
 
@@ -17,8 +17,6 @@ class PaintApplication:
     x_position, y_position = None, None
 
     x1_line_pt, y1_line_pt, x2_line_pt, y2_line_pt = None, None, None, None
-
-    wordChoice = "Wow"
 
 # ------ Mouse Up -----------------
     def left_but_up(self, event=None):
@@ -119,23 +117,49 @@ class PaintApplication:
 
 
 # ------ Draw Text -----------------
-    
-    def text_draw(self, event=None):
-    
-        if None not in(self.x1_line_pt, self.y1_line_pt): 
-            
-            text_font = tkinter.font.Font(family ="Cambria", size = 20, weight = "bold")
 
-            event.widget.create_text(self.x1_line_pt, self.y1_line_pt, fill = "black", font = text_font, text = "Hello!")
+    def text_draw(self, event=None):
+
+        if None not in(self.x1_line_pt, self.y1_line_pt):
+
+            text_font = tkinter.font.Font(
+                family="Cambria", size=20, weight="bold")
+
+            event.widget.create_text(
+                self.x1_line_pt, self.y1_line_pt, fill="black", font=text_font, text="Hello!")
 
 # ------ Menu Bar -----------------
 
+    #Variables
+    global click 
     click = StringVar()
-    draw_tool = click
+    click.set(draw_tool)
 
-    drop = OptionMenu(root, click, "line","text", "arc", "oval", "rectangle")
+    #Drawing Tools
+    tool_options = [
+
+        "line",
+        "text",
+        "arc",
+        "oval",
+        "rectangle"
+    ]
+
+    
+   #Changing Function
+    def change(*args):
+        global dropdown_choice
+        dropdown_choice = str(click.get())
+        
+        self.draw_tool = dropdown_choice
+
+    #Buttons and Menu Set-up
+    drop = OptionMenu(root, click, *tool_options)
     drop.pack()
-   
+    
+    
+    click.trace("w", change)
+
 
 
 # ------ Intialize -----------------
@@ -157,6 +181,7 @@ class PaintApplication:
         drawing_area.bind("<ButtonPress-1>", self.left_but_down)
         drawing_area.bind("<ButtonRelease-1>", self.left_but_up)
 
+        
 
 paint_application = PaintApplication(root)
 root.mainloop()
